@@ -4,18 +4,18 @@ package escpos
 type Font uint8
 
 const (
-	FontA = 0
-	FontB = 1
-	FontC = 2
+	FontA Font = 0
+	FontB Font = 1
+	FontC Font = 2
 )
 
 // Alignment defines the text blignment
 type Alignment uint8
 
 const (
-	AlignLeft   = 0
-	AlignCenter = 1
-	AlignRight  = 2
+	AlignLeft   Alignment = 0
+	AlignCenter Alignment = 1
+	AlignRight  Alignment = 2
 )
 
 // BarcodeType defines the type of barcode
@@ -23,14 +23,14 @@ type BarcodeType string
 
 const (
 	// function type A
-	BarcodeTypeUPCA    = "\x00"
-	BarcodeTypeUPCE    = "\x01"
-	BarcodeTypeEAN13   = "\x02"
-	BarcodeTypeEAN8    = "\x03"
-	BarcodeTypeCODE39  = "\x04"
-	BarcodeTypeITF     = "\x05"
-	BarcodeTypeCODABAR = "\x06"
+	BarcodeTypeUPCA    BarcodeType = "\x00"
+	BarcodeTypeUPCE    BarcodeType = "\x01"
+	BarcodeTypeEAN13   BarcodeType = "\x02"
+	BarcodeTypeEAN8    BarcodeType = "\x03"
+	BarcodeTypeCODE39  BarcodeType = "\x04"
+	BarcodeTypeITF     BarcodeType = "\x05"
+	BarcodeTypeCODABAR BarcodeType = "\x06"
 
 	// function type B
-	BarcodeTypeCODE128 = "\x49"
+	BarcodeTypeCODE128 BarcodeType = "\x49"
 )
