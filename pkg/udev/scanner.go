@@ -1,5 +1,7 @@
 package udev
 
+// this is a modified version of github.com/citilinkru/libudev to only work for USB to scan faster
+
 import (
 	"bufio"
 	"bytes"
