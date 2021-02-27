@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cbf56fbc-eec4-45be-af35-6a79ac6f9de9" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="$PROJECT_DIR$/../../../../go1.16" />
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProjectId" id="1p3lMPEs89xXBzFDlJo07ry6jRO" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cbf56fbc-eec4-45be-af35-6a79ac6f9de9" name="Default Changelist" comment="" />
+      <created>1614419605955</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614419605955</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="3646" y="1019" width="437" height="141" key="#GOROOT" timestamp="1614419633217">
+      <screen x="1920" y="0" width="3840" height="2160" />
+    </state>
+    <state x="3646" y="1019" width="437" height="141" key="#GOROOT/1920.0.3840.2160/0.50.1920.1150/5760.0.2560.1440@1920.0.3840.2160" timestamp="1614419633217" />
+    <state x="3660" y="923" width="400" height="334" key="#Go_Modules" timestamp="1614419638990">
+      <screen x="1920" y="0" width="3840" height="2160" />
+    </state>
+    <state x="3660" y="923" width="400" height="334" key="#Go_Modules/1920.0.3840.2160/0.50.1920.1150/5760.0.2560.1440@1920.0.3840.2160" timestamp="1614419638990" />
+    <state x="4480" y="888" width="655" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614439924196">
+      <screen x="1920" y="0" width="3840" height="2160" />
+    </state>
+    <state x="4480" y="888" width="655" height="403" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.3840.2160/0.50.1920.1150/5760.0.2560.1440@1920.0.3840.2160" timestamp="1614439924196" />
+    <state x="3644" y="848" key="FileChooserDialogImpl" timestamp="1614419625358">
+      <screen x="1920" y="0" width="3840" height="2160" />
+    </state>
+    <state x="3644" y="848" key="FileChooserDialogImpl/1920.0.3840.2160/0.50.1920.1150/5760.0.2560.1440@1920.0.3840.2160" timestamp="1614419625358" />
+    <state x="3339" y="721" width="1052" height="737" key="SettingsEditor" timestamp="1614419656213">
+      <screen x="1920" y="0" width="3840" height="2160" />
+    </state>
+    <state x="3339" y="721" width="1052" height="737" key="SettingsEditor/1920.0.3840.2160/0.50.1920.1150/5760.0.2560.1440@1920.0.3840.2160" timestamp="1614419656213" />
+    <state x="3528" y="518" width="672" height="678" key="search.everywhere.popup" timestamp="1614440212775">
+      <screen x="1920" y="0" width="3840" height="2160" />
+    </state>
+    <state x="3528" y="518" width="672" height="678" key="search.everywhere.popup/1920.0.3840.2160/0.50.1920.1150/5760.0.2560.1440@1920.0.3840.2160" timestamp="1614440212775" />
+  </component>
+</project>
