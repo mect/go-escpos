@@ -3,6 +3,8 @@ This is a Go library to talk to escpos capable devices, mainly the Epson POS pri
 
 it will allow you to send print jobs in a simple functional interface, this library also supports automatic discovery of USB devices.
 
+[Documentation can be found on pkg.go.dev](https://pkg.go.dev/github.com/mect/go-escpos)
+
 ## Example
 
 ```go
