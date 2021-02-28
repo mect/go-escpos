@@ -92,6 +92,11 @@ func (p *Printer) End() error {
 	return p.write("\xFA")
 }
 
+// Close closes the connection to the printer, all commands will not work after this
+func (p *Printer) Close() error {
+	return p.Close()
+}
+
 // Cut sends the command to cut the paper
 func (p *Printer) Cut() error {
 	return p.write("\x1DVA0")
