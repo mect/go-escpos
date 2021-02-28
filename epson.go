@@ -61,7 +61,7 @@ func NewUSBPrinter(vendorID uint16, productID uint16) (*Printer, error) {
 		return nil, ErrorNoDevicesFound
 	}
 
-	f, err := os.OpenFile("/dev/usb/lp4", os.O_RDWR, 0)
+	f, err := os.OpenFile(devpath, os.O_RDWR, 0)
 	if err != nil {
 		return nil, fmt.Errorf("couldn't open %q device: %w", devpath, err)
 	}
