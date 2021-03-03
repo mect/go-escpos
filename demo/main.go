@@ -13,7 +13,12 @@ func main() {
 		return
 	}
 
-	p.Init()
+	err = p.Init()
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
 	p.Smooth(true)
 	p.Size(2, 2)
 	p.PrintLn("HELLO GO")
@@ -42,4 +47,6 @@ func main() {
 	p.Feed(2)
 	p.Cut()
 	p.End()
+	// do the next piece of work
+
 }

@@ -7,6 +7,9 @@ import (
 	"os"
 	"path"
 	"strings"
+	"time"
+
+	"github.com/davecgh/go-spew/spew"
 
 	"github.com/bjarneh/latinx"
 )
@@ -15,6 +18,7 @@ var ErrorNoDevicesFound = errors.New("No devices found")
 
 type Printer struct {
 	s io.ReadWriteCloser
+	f *os.File
 }
 
 // NewUSBPrinter returns a new printer with a USb Vendor and Product ID
@@ -44,10 +48,14 @@ func NewUSBPrinterByPath(devpath string) (*Printer, error) {
 	}
 	return &Printer{
 		s: f,
+		f: f,
 	}, nil
 }
 
 func (p *Printer) write(cmd string) error {
+	if p.f != nil {
+		p.f.SetWriteDeadline(time.Now().Add(10 * time.Second))
+	}
 	_, err := p.s.Write([]byte(cmd))
 	return err
 }
@@ -182,4 +190,20 @@ func (p *Printer) Barcode(barcode string, format BarcodeType) error {
 	}
 
 	return p.Print(fmt.Sprintf("%s", barcode))
+}
+
+func (p *Printer) GetErrorStatus() (ErrorStatus, error) {
+	_, err := p.s.Write([]byte{0x10, 0x04, 0x02})
+	if err != nil {
+		return 0, err
+	}
+	data := make([]byte, 1)
+	_, err = p.s.Read(data)
+	if err != nil {
+		return 0, err
+	}
+
+	spew.Dump(data)
+
+	return ErrorStatus(data[0]), nil
 }

@@ -34,3 +34,12 @@ const (
 	// function type B
 	BarcodeTypeCODE128 BarcodeType = "\x49"
 )
+
+type ErrorStatus byte
+
+const (
+	ErrorNone      ErrorStatus = 0x00
+	ErrorCoverOpen ErrorStatus = 0x04
+	ErrorPaperOut  ErrorStatus = 0x20
+	ErrorGeneric   ErrorStatus = 0x40
+)
