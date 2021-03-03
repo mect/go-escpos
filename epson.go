@@ -79,7 +79,7 @@ func (p *Printer) End() error {
 
 // Close closes the connection to the printer, all commands will not work after this
 func (p *Printer) Close() error {
-	return p.Close()
+	return p.s.Close()
 }
 
 // Cut sends the command to cut the paper
