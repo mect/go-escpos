@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	p, err := escpos.NewUSBPrinter(0, 0)
+	p, err := escpos.NewUSBPrinterByPath("") // empry string will do a self discovery
 	if err != nil {
 		fmt.Print(err)
 		return

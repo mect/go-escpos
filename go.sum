@@ -2,3 +2,5 @@ github.com/bjarneh/latinx v0.0.0-20120329061922-4dfe9ba2a293 h1:kQGfMtLkjk7aSGf4
 github.com/bjarneh/latinx v0.0.0-20120329061922-4dfe9ba2a293/go.mod h1:HdstVrPoCN+CT+wHjeU6juUog6IM+EShcDoARBbc7cU=
 github.com/citilinkru/libudev v1.0.0 h1:upErSdhsJGdiKxwxPmvcz43fwJJD9R+y1j8BqU4wHog=
 github.com/citilinkru/libudev v1.0.0/go.mod h1:yaNdhdtfJMs5flqeXzUOMO0mT9QnyNh/U/jdY4WhA/I=
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

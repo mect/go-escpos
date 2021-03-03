@@ -6,12 +6,9 @@ import (
 	"io"
 	"os"
 	"path"
-	"strconv"
 	"strings"
 
 	"github.com/bjarneh/latinx"
-
-	"github.com/mect/go-escpos/pkg/udev"
 )
 
 var ErrorNoDevicesFound = errors.New("No devices found")
@@ -22,43 +19,23 @@ type Printer struct {
 
 // NewUSBPrinter returns a new printer with a USb Vendor and Product ID
 // if both are 0 it will return the first found Epson POS printer
-func NewUSBPrinter(vendorID uint16, productID uint16) (*Printer, error) {
-	sc := udev.NewScanner()
-	devices, err := sc.ScanDevices()
-	if err != nil {
-		return nil, fmt.Errorf("couldn't list USB devices: %w", err)
-	}
-
-	devpath := ""
-	for _, dev := range devices {
-		matches := true
-		if vendorID != 0 && dev.Env["ID_VENDOR_FROM_DATABASE"] != "" {
-			if matches {
-				i, _ := strconv.ParseInt(dev.Env["ID_VENDOR_FROM_DATABASE"], 16, 32)
-				matches = uint16(i) == vendorID
-			}
-		}
-		if productID != 0 && dev.Env["ID_MODEL_ID"] != "" {
-			if matches {
-				i, _ := strconv.ParseInt(dev.Env["ID_MODEL_ID"], 16, 32)
-				matches = uint16(i) == vendorID
-			}
+func NewUSBPrinterByPath(devpath string) (*Printer, error) {
+	if devpath == "" {
+		entries, err := os.ReadDir("/dev/usb")
+		if err != nil {
+			return nil, err
 		}
 
-		if vendorID == 0 && productID == 0 && strings.Contains(dev.Env["ID_VENDOR_FROM_DATABASE"], "Epson") {
-			matches = true
-		}
-
-		if matches {
-			if dev.Env["DEVNAME"] != "" {
-				devpath = path.Join("/dev/", dev.Env["DEVNAME"])
+		for _, entry := range entries {
+			if strings.HasPrefix(entry.Name(), "lp") {
+				devpath = path.Join("/dev/usb", entry.Name())
 				break
 			}
 		}
-	}
 
-	if devpath == "" {
-		return nil, ErrorNoDevicesFound
+		if devpath == "" {
+			return nil, ErrorNoDevicesFound
+		}
 	}
 
 	f, err := os.OpenFile(devpath, os.O_RDWR, 0)
