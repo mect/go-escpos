@@ -95,6 +95,9 @@ func (p *Printer) Feed(n int) error {
 // Print prints a string
 // the data is re-encoded from Go's UTF-8 to ISO8859-15
 func (p *Printer) Print(data string) error {
+	if data == "" {
+		return nil
+	}
 	converter := latinx.Get(latinx.ISO_8859_15)
 	b, _, err := converter.Encode([]byte(data))
 	if err != nil {
@@ -189,7 +192,7 @@ func (p *Printer) Barcode(barcode string, format BarcodeType) error {
 		return err
 	}
 
-	return p.Print(fmt.Sprintf("%s", barcode))
+	return p.PrintLn(fmt.Sprintf("%s", barcode))
 }
 
 func (p *Printer) GetErrorStatus() (ErrorStatus, error) {
