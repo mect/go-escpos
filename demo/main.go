@@ -2,18 +2,12 @@ package main
 
 import (
 	"fmt"
-	"machine"
 
 	"github.com/mect/go-escpos"
 )
 
 func main() {
-	uart := machine.UART(1)
-	uart.Configure(machine.UARTConfig{
-		BaudRate: machine.UART_BaudRate_115200,
-	})
-
-	p, err := escpos.NewPrinterByUART(uart)
+	p, err := escpos.NewUSBPrinterByPath("") // empry string will do a self discovery
 	if err != nil {
 		fmt.Print(err)
 		return
