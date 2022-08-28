@@ -1,7 +1,10 @@
 # go-escpos
-This is a Go library to talk to escpos capable devices, mainly the Epson POS printers. 
+
+This is a Go library to talk to escpos capable devices, mainly the Epson POS printers.
 
 it will allow you to send print jobs in a simple functional interface, this library also supports automatic discovery of USB devices.
+
+This library works with both Go and [TinyGo](https://tinygo.org/) (for microcontrollers).
 
 [Documentation can be found on pkg.go.dev](https://pkg.go.dev/github.com/mect/go-escpos)
 
@@ -23,7 +26,7 @@ func main() {
 		return
 	}
 
-	p.Init() // start 
+	p.Init() // start
 	p.Smooth(true) // use smootth printing
 	p.Size(2, 2) // set font size
 	p.PrintLn("HELLO GO")
@@ -56,11 +59,14 @@ func main() {
 
 ```
 
+(The TinyGo example can be found in `demo-tinygo`)
+
 ## Limitations
-* It currently only supports USB
-* The USB discovery only works on Linux due to the use of `udev`
+
+- The USB discovery only works on Linux due to the use of `udev`
 
 (PRs to fix these welcome!)
 
 ## Known to work with
-* Epson TM-20III
+
+- Epson TM-20III

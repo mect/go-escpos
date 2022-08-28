@@ -5,59 +5,25 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"path"
-	"strings"
-	"time"
-
-	"github.com/davecgh/go-spew/spew"
-
-	"github.com/bjarneh/latinx"
 )
 
 var ErrorNoDevicesFound = errors.New("No devices found")
+
+// fufilled by either tinygoConverter or latinx
+type characterConverter interface {
+	Encode(utf_8 []byte) (latin []byte, success int, err error)
+}
 
 type Printer struct {
 	s io.ReadWriteCloser
 	f *os.File
 }
 
-// NewUSBPrinter returns a new printer with a USb Vendor and Product ID
-// if both are 0 it will return the first found Epson POS printer
-func NewUSBPrinterByPath(devpath string) (*Printer, error) {
-	if devpath == "" {
-		entries, err := os.ReadDir("/dev/usb")
-		if err != nil {
-			return nil, err
-		}
+func NewPrinterByRW(rwc io.ReadWriteCloser) (*Printer, error) {
 
-		for _, entry := range entries {
-			if strings.HasPrefix(entry.Name(), "lp") {
-				devpath = path.Join("/dev/usb", entry.Name())
-				break
-			}
-		}
-
-		if devpath == "" {
-			return nil, ErrorNoDevicesFound
-		}
-	}
-
-	f, err := os.OpenFile(devpath, os.O_RDWR, 0)
-	if err != nil {
-		return nil, fmt.Errorf("couldn't open %q device: %w", devpath, err)
-	}
 	return &Printer{
-		s: f,
-		f: f,
+		s: rwc,
 	}, nil
-}
-
-func (p *Printer) write(cmd string) error {
-	if p.f != nil {
-		p.f.SetWriteDeadline(time.Now().Add(10 * time.Second))
-	}
-	_, err := p.s.Write([]byte(cmd))
-	return err
 }
 
 // Init sends an init signal
@@ -98,7 +64,7 @@ func (p *Printer) Print(data string) error {
 	if data == "" {
 		return nil
 	}
-	converter := latinx.Get(latinx.ISO_8859_15)
+
 	b, _, err := converter.Encode([]byte(data))
 	if err != nil {
 		return err
@@ -205,8 +171,6 @@ func (p *Printer) GetErrorStatus() (ErrorStatus, error) {
 	if err != nil {
 		return 0, err
 	}
-
-	spew.Dump(data)
 
 	return ErrorStatus(data[0]), nil
 }
