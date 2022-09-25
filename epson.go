@@ -118,6 +118,19 @@ func (p *Printer) Align(align Alignment) error {
 	return p.write(fmt.Sprintf("\x1Ba%c", align))
 }
 
+// PrintAreaWidth will set the print area width, by default it is the maximum. Eg. 380 is handy for less wide receipts used by card terminals
+func (p *Printer) PrintAreaWidth(width int) error {
+	var nh, nl uint8
+	if width < 256 {
+		nh = 0
+		nl = uint8(width)
+	} else {
+		nh = uint8(width / 256)
+		nl = uint8(width % 256)
+	}
+	return p.write(fmt.Sprintf("\x1DW%c%c", nl, nh))
+}
+
 // Barcode will print a barcode of a specified type as well as the text value
 func (p *Printer) Barcode(barcode string, format BarcodeType) error {
 
