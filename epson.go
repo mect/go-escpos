@@ -171,7 +171,49 @@ func (p *Printer) Barcode(barcode string, format BarcodeType) error {
 		return err
 	}
 
-	return p.PrintLn(fmt.Sprintf("%s", barcode))
+	return p.PrintLn(barcode)
+}
+
+// QR will print a QR code with given data, the size is between 2 and 16, if an invalid size is given it will default to 3
+func (p *Printer) QR(code string, size int) error {
+	return p.twodimensionBarcode("\x31", code, size)
+}
+
+// PDF417 will print a PDF417 code with given data, the size is between 2 and 16, if an invalid size is given it will default to 3
+func (p *Printer) PDF417(code string, size int) error {
+	return p.twodimensionBarcode("\x30", code, size)
+}
+
+// Aztec will print a Aztec code with given data, the size is between 2 and 16, if an invalid size is given it will default to 3
+func (p *Printer) Aztec(code string, size int) error {
+	return p.twodimensionBarcode("\x35", code, size)
+}
+
+// DataMatrix will print a DataMatrix code with given data, the size is between 2 and 16, if an invalid size is given it will default to 3
+func (p *Printer) DataMatrix(code string, size int) error {
+	return p.twodimensionBarcode("\x36", code, size)
+}
+
+func (p *Printer) twodimensionBarcode(codetype string, code string, size int) error {
+	if size < 2 || size > 16 {
+		size = 3
+	}
+	const twoDbar = "\x1d\x28\x6b" // GS ( k
+
+	p.write(twoDbar + "\x03\x00" + codetype + "\x43" + fmt.Sprintf("%c", size)) // set size
+	if codetype == "\x31" {
+		p.write(twoDbar + "\x03\x00" + codetype + "\x45\x30\x0A") // set error correction level to L
+	}
+
+	codePL := len(code) + 3
+	codePH := codePL / 256
+	codePL = codePL % 256
+
+	p.write(twoDbar + fmt.Sprintf("%c%c", codePL, codePH) + codetype + "\x50\x30" + code) // send code data
+
+	p.write(twoDbar + "\x03\x00" + codetype + "\x51\x30\x0A") // print barcode
+
+	return nil
 }
 
 func (p *Printer) GetErrorStatus() (ErrorStatus, error) {

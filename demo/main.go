@@ -19,7 +19,6 @@ func main() {
 		return
 	}
 
-	p.Smooth(true)
 	p.Size(2, 2)
 	p.PrintLn("HELLO GO")
 	p.Size(1, 1)
@@ -43,6 +42,12 @@ func main() {
 	p.Align(escpos.AlignCenter)
 	p.Barcode("MECT", escpos.BarcodeTypeCODE39)
 	p.Align(escpos.AlignLeft)
+
+	p.Feed(1)
+	p.QR("https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4)
+	p.Aztec("Also works with Aztec codes", 4)
+	p.PDF417("And PDF417", 4)
+	p.DataMatrix("Or even cute DataMatrix", 4)
 
 	p.Feed(2)
 	p.Cut()
