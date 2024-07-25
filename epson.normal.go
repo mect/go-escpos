@@ -6,6 +6,7 @@ package escpos
 
 import (
 	"fmt"
+	"image"
 	"os"
 	"path"
 	"strings"
@@ -65,19 +66,24 @@ func (p *Printer) AztecViaImage(data string, width, height int) error {
 	if width < 1 {
 		width = 500
 	}
+
 	aztecCode, err := aztec.Encode([]byte(data), aztec.DEFAULT_EC_PERCENT, aztec.DEFAULT_LAYERS)
 	if err != nil {
 		return fmt.Errorf("failed to encode aztec code: %w", err)
 	}
 
-	// Scale the barcode to 200x200 pixels
 	aztecCode, err = barcode.Scale(aztecCode, width, height)
 	if err != nil {
 		return fmt.Errorf("failed to scale aztec code: %w", err)
 	}
 
-	xL, xH, yL, yH, imgData := printImage(aztecCode)
-	p.write("\x1dv\x30\x00" + string(append([]byte{xL, xH, yL, yH}, imgData...)))
+	return p.Image(aztecCode)
+}
 
-	return nil
+// Image prints a raster image
+//
+// The image must be narrower than the printer's pixel width
+func (p *Printer) Image(img image.Image) error {
+	xL, xH, yL, yH, imgData := printImage(img)
+	return p.write("\x1dv\x30\x00" + string(append([]byte{xL, xH, yL, yH}, imgData...)))
 }
